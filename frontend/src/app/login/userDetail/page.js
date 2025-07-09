@@ -17,7 +17,7 @@ export default function Page() {
 
     try {
       // Step 1: Verify Token
-      const verifyToken = await fetch("http://localhost:8000/verify-token", {
+      const verifyToken = await fetch(`${process.env.BASE_URL}/verify-token`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export default function Page() {
       
 
       // Step 2: Fetch User Details
-      const response = await fetch(`http://localhost:8000/userDetail/`, {
+      const response = await fetch(`${process.env.BASE_URL}/userDetail/`, {
         method: "GET",
         headers: { 
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export default function Page() {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:8000/delete/${userData?._id}`, {
+      const response = await fetch(`${process.env.BASE_URL}/delete/${userData?._id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export default function Page() {
     }
   };
 const handleLogOut=async ()=>{
-  const data= await fetch("http://localhost:8000/logout",{method:"POST",credentials:"include"}).then((res) => res.json())
+  const data= await fetch(`${process.env.BASE_URL}/logout`,{method:"POST",credentials:"include"}).then((res) => res.json())
   .then((data) => {
       localStorage.removeItem("jwtToken")
     

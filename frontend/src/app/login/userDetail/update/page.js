@@ -21,7 +21,7 @@ function UpdateUser() {
       }
 
       try {
-        const response = await fetch("http://localhost:8000/userDetail", {
+        const response = await fetch(`${process.env.BASE_URL}/userDetail`, {
           method: "GET",
           headers: { 
             "Content-Type": "application/json",
@@ -63,7 +63,7 @@ function UpdateUser() {
 
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:8000/update?userId=${userData?._id}`, {
+      const response = await fetch(`${process.env.BASE_URL}/update?userId=${userData?._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
