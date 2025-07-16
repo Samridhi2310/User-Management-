@@ -28,10 +28,12 @@ exports.CheckUser=async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ Email: email }).select("+Password");
 
-        if (!user || !(await bcrypt.compare(password, user.Password))) {
-            return res.status(401).json({ message: "Invalid credentials" });
+        if (!user) {
+            return res.status(401).json({ message: "User not exist" });
         }
-
+        if( !(await bcrypt.compare(password, user.Password))){
+             return res.status(401).json({ message: "Password doesnot match" });
+        }
         const token = jwt.sign({ userId: user._id, userEmail:user.Email}, JWT_SECRET, { expiresIn: "10m" });
         res.cookie("jwtToken",token,{httpOnly:true,secure:false,sameSite:"lax",maxAge: 10 * 60 * 1000 });
 
@@ -56,16 +58,18 @@ exports.GetUserDetails= async (req, res) => {
 
 exports.DeleteUser=async (req, res) => {
     try {
-        const {id}=req.params;
+        const id =req.params.id;
+        console.log(id)
         const deletedUser = await User.findByIdAndDelete(id);
 
         if (!deletedUser) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(404).json({ message: "Error in deleting the user" });
         }
         res.clearCookie("jwtToken");
 
         res.json({ message: "User deleted successfully" });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: "Error deleting user" });
     }
 }

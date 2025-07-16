@@ -28,7 +28,7 @@ function CreateUser() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`${process.env.BASE_URL}/signup`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -47,7 +47,7 @@ function CreateUser() {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Sign In
+          Sign Up
         </h2>
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Email Input */}
@@ -89,7 +89,7 @@ function CreateUser() {
             type="submit"
             className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg shadow-lg font-semibold hover:from-purple-600 hover:to-blue-500 transition-all duration-300"
           >
-            Sign In
+            Sign Up
           </button>
         </form>
         {/* Message Display */}

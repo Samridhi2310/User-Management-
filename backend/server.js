@@ -15,6 +15,6 @@ app.use(cors({origin:"http://localhost:3000",
 app.use("/api", userRoutes); // ✅ Use a prefix to avoid conflicts
 
 
-
+const Port = process.env.PORT
 // Start Server
-app.listen(process.env.PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`));

@@ -19,7 +19,7 @@ export default function DeleteUser() {
     }
 
     try {
-      const response = await fetch(`${process.env.BASE_URL}/delete`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/delete`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userEmail }),
